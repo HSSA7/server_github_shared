@@ -1,0 +1,163 @@
+
+TRAIN_FLIST: datasets/nuscenes/train
+VAL_FLIST: datasets/nuscenes/val
+TEST_FLIST: test_images/image.jpg
+TEST_MASK_FLIST: test_images/mask.png
+RESULTS: results/nuscenes
+
+GAN_LOSS: hinge
+L1_LOSS_WEIGHT: 1
+GAN_LOSS_WEIGHT: 0.1
+NAME: nuscenes
+
+
+---------------------------------
+
+
+start training...
+
+
+
+Training epoch: 1
+/opt/miniconda3/lib/python3.12/site-packages/torch/autograd/graph.py:825: UserWarning: Error detected in ConvolutionBackward0. Traceback of forward call that caused the error:
+  File "/home/hritav/edge-connect/train.py", line 4, in <module>
+    main(mode=1)
+  File "/home/hritav/edge-connect/main.py", line 64, in main
+    model.train()
+  File "/home/hritav/edge-connect/src/edge_connect.py", line 120, in train
+    outputs, gen_loss, dis_loss, logs = self.edge_model.process(images_gray, edges, masks)
+  File "/home/hritav/edge-connect/src/models.py", line 110, in process
+    gen_fake, gen_fake_feat = self.discriminator(gen_input_fake)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/hritav/edge-connect/src/networks.py", line 176, in forward
+    conv5 = self.conv5(conv4)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 554, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 549, in _conv_forward
+    return F.conv2d(
+ (Triggered internally at /opt/conda/conda-bld/pytorch_1729647378361/work/torch/csrc/autograd/python_anomaly_mode.cpp:110.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+Traceback (most recent call last):
+  File "/home/hritav/edge-connect/train.py", line 4, in <module>
+    main(mode=1)
+  File "/home/hritav/edge-connect/main.py", line 64, in main
+    model.train()
+  File "/home/hritav/edge-connect/src/edge_connect.py", line 124, in train
+    self.edge_model.backward(gen_loss, dis_loss)
+  File "/home/hritav/edge-connect/src/models.py", line 147, in backward
+    gen_loss.backward()
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation: [torch.cuda.FloatTensor [1, 512, 4, 4]] is at version 2; expected version 1 instead. Hint: the backtrace further above shows the operation that failed to compute its gradient. The variable in question was changed in there or anywhere later. Good luck!
+hritav@Server4A6000:~/edge-connect$ pytho3n train.py
+Command 'pytho3n' not found, did you mean:
+  command 'python3' from deb python3 (3.12.3-0ubuntu2)
+Try: apt install <deb name>
+hritav@Server4A6000:~/edge-connect$ python3 train.py
+/opt/miniconda3/lib/python3.12/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+/opt/miniconda3/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/opt/miniconda3/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG19_Weights.IMAGENET1K_V1`. You can also use `weights=VGG19_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Model configurations:
+---------------------------------
+MODE: 2
+MODEL: 1
+MASK: 1
+
+INPUT_SIZE: 256
+BATCH_SIZE: 4
+SIGMA: 4
+
+MAX_ITERS: 100
+LR: 0.0001
+SAVE_INTERVAL: 50
+
+TRAIN_FLIST: datasets/nuscenes/train
+VAL_FLIST: datasets/nuscenes/val
+TEST_FLIST: test_images/image.jpg
+TEST_MASK_FLIST: test_images/mask.png
+RESULTS: results/nuscenes
+
+GAN_LOSS: hinge
+L1_LOSS_WEIGHT: 1
+GAN_LOSS_WEIGHT: 0.1
+NAME: nuscenes
+
+
+---------------------------------
+
+
+start training...
+
+
+
+Training epoch: 1
+/opt/miniconda3/lib/python3.12/site-packages/torch/autograd/graph.py:825: UserWarning: Error detected in ConvolutionBackward0. Traceback of forward call that caused the error:
+  File "/home/hritav/edge-connect/train.py", line 4, in <module>
+    main(mode=1)
+  File "/home/hritav/edge-connect/main.py", line 64, in main
+    model.train()
+  File "/home/hritav/edge-connect/src/edge_connect.py", line 120, in train
+    outputs, gen_loss, dis_loss, logs = self.edge_model.process(images_gray, edges, masks)
+  File "/home/hritav/edge-connect/src/models.py", line 110, in process
+    gen_fake, gen_fake_feat = self.discriminator(gen_input_fake)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/hritav/edge-connect/src/networks.py", line 176, in forward
+    conv5 = self.conv5(conv4)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 554, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 549, in _conv_forward
+    return F.conv2d(
+ (Triggered internally at /opt/conda/conda-bld/pytorch_1729647378361/work/torch/csrc/autograd/python_anomaly_mode.cpp:110.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+Traceback (most recent call last):
+  File "/home/hritav/edge-connect/train.py", line 4, in <module>
+    main(mode=1)
+  File "/home/hritav/edge-connect/main.py", line 64, in main
+    model.train()
+  File "/home/hritav/edge-connect/src/edge_connect.py", line 124, in train
+    self.edge_model.backward(gen_loss, dis_loss)
+  File "/home/hritav/edge-connect/src/models.py", line 147, in backward
+    gen_loss.backward()
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/opt/miniconda3/lib/python3.12/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation: [torch.cuda.FloatTensor [1, 512, 4, 4]] is at version 2; expected version 1 instead. Hint: the backtrace further above shows the operation that failed to compute its gradient. The variable in question was changed in there or anywhere later. Good luck!
+hritav@Server4A6000:~/edge-connect$
